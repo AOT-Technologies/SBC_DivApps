@@ -14,6 +14,8 @@ spring.datasource:
   username: ${JDBC_USER:sa}
   password: ${JDBC_PASSWORD:sa}
   driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+  hikari:
+    connectionTimeout: 60000
 #spring.h2.console.enabled: true
 
 analytics.datasource:
@@ -21,6 +23,8 @@ analytics.datasource:
   username: ${ANALYTICS_DB_USERNAME}
   password: ${ANALYTICS_DB_PASSWORD}
   driverClassName: ${ANALYTICS_DB_DRIVER}
+  hikari:
+    connectionTimeout: 60000
 
 spring:
   jersey:
@@ -32,6 +36,12 @@ spring:
           issuer-uri: ${keycloak.url}/auth/realms/${keycloak.url.realm}
   main:
     allow-bean-definition-overriding: true
+  session:
+    store-type: ${SESSION_STORE_TYPE}
+    redis.flush-mode: immediate
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 
 management:
   endpoints:
